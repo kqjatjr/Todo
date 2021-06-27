@@ -103,7 +103,7 @@
     </style>
   </head>
   <body>
-    <div class="todolist">
+    <div class="todolist" id="my-todo-list">
       <h1 class="todolist_title">TODOLIST</h1>
       <div class="todolist_input-box">
         <input class="todolist_input" />
@@ -116,6 +116,7 @@
     <script type="text/javascript">
       let todos = [];
       const $todolist = document.querySelector(".todolist");
+
       function handleClickAdd() {
         const $input = $todolist.querySelector(".todolist_input");
         if ($input.value.length === 0) {
@@ -123,18 +124,15 @@
         }
         todos.push({ id: Date.now(), value: $input.value });
         $input.value = "";
-        const $list = $todolist.querySelector(".todolist_todo-list");
-        $list.innerHTML = todos
-          .map(
-            (todo) => `<li class="todolist_todo-wrapper">
-                    <div class="todolist_todo-title">${todo.value}</div>
-                    <button class="todolist_todo-done-button" onclick="handleClickDone(${todo.id})">v</button>
-                    </li>`,
-          )
-          .join("");
+        renderTodoList(todos);
       }
+
       function handleClickDone(id) {
         todos = todos.filter((todo) => todo.id !== id);
+        renderTodoList(todos);
+      }
+
+      function renderTodoList(todos) {
         const $list = $todolist.querySelector(".todolist_todo-list");
         $list.innerHTML = todos
           .map(
