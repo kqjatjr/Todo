@@ -128,6 +128,11 @@
             throw new Error("todo add 버튼의 앨리먼트가 존재하지 않습니다.");
           }
           $add.addEventListener("click", this.handleClickAdd);
+          const $list = this.$todolist.querySelector(".todolist_todo-list");
+          if (!$list) {
+            throw new Error("todo list의 앨리먼트가 존재하지 않습니다.");
+          }
+          $list.addEventListener("click", this.handleClickDone);
         }
 
         handleClickAdd = () => {
@@ -141,6 +146,9 @@
         };
 
         handleClickDone = (event) => {
+          if (!target.classList.contains("odolist_todo-done-button")) {
+            return;
+          }
           const { target } = event;
           this.todos = this.todos.filter(
             (todo) => todo.id !== parseInt(target.dataset.id, 10),
@@ -158,12 +166,6 @@
                     </li>`,
             )
             .join("");
-          const doneButtonList = this.$todolist.querySelectorAll(
-            ".todolist_todo-done-button",
-          );
-          for (const $done of doneButtonList) {
-            $done.addEventListener("click", this.handleClickDone);
-          }
         }
       }
       const todo = new Todo("#my-todo-list");
