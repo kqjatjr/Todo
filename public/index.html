@@ -1,122 +1,150 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>TODOLIST</title>
-        <style>
-            body {
-                background-color: #cccccc;
-            }
-            .todolist {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                width: 800px;
-                box-sizing: border-box;
-                margin: 100px auto 0 auto;
-                padding: 20px;
-                background-color: white;
-                border-radius: 8px;
-                box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2)
-            }
-            .todolist .todolist_title {
-                font-size: 48px;
-                margin: 0px;
-                margin-bottom: 20px;           
-            }
-            .todolist .todolist_input-box{
-                height: 55px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .todolist .todolist_input-box .todolist_input{
-                box-sizing: border-box;
-                font-size: 28px;
-                padding: 0px;
-                margin-right: 5px;
-                border: none;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-                width: 400px;
-                height: 50px;
-            }
-            .todolist .todolist_input-box .todolist_input:focus{
-                outline: none;
-                border-bottom: 2px solid #6EB8E6;
-                transition: 200ms ease-in-out;
-            }
-            .todolist .todolist_input-box .todolist_add-buttom{
-                border-radius: 8px;
-                font-size: 24px;
-                width: 100px;
-                height: 50px;
-                background-color: #70C8FF;
-                border: none;
-            }
-            .todolist .todolist_input-box .todolist_add-buttom:hover{
-                background-color: #6EB8E6;
-            }
-            .todolist .todolist_input-box .todolist_add-buttom:active{
-                color: white;
-                background-color: #6DAED6;
-            }
-            .todolist .todolist_todo-list{
-                width: 100%;
-                padding: 0px;
-                margin: 0px;
-                list-style: none
-            }
-            .todolist .todolist_todo-list .todolist_todo-wrapper {
-                display: block;
-                height: 30px;
-                margin: 0px;
-                font-size: 24px;
-                display: flex;
-                justify-content: space-between;
-                border-left: 3px solid #70C8FF;
-                margin-bottom: 2px;
-            }
-            .todolist .todolist_todo-list .todolist_todo-wrapper .todolist_todo-title {
-                margin-left: 15px;
-            }
-            .todolist .todolist_todo-list .todolist_todo-wrapper .todolist_todo-done-button {
-                width: 30px;
-                height: 30px;
-                color: white;
-                background-color: #70C8FF;
-                border: none;
-                border-radius: 5px;
-            }
-            .todolist .todolist_todo-list .todolist_todo-wrapper .todolist_todo-done-button:active {
-                background-color: #6DAED6;
-            }
-
-        </style>
-    </head>
-    <body>
-        <div class="todolist">
-            <h1 class="todolist_title">TODOLIST</h1>
-            <div class="todolist_input-box">
-                <input class="todolist_input" />
-                <button class="todolist_add-buttom" onclick="handleClickAdd()">ADD</button>
-            </div>
-            <ul class="todolist_todo-list">
-            </ul>
-        </div>
-        <script type="text/javascript">
-            const todos = [];
-            const $todolist = document.querySelector('.todolist')
-            function handleClickAdd(){
-                const $input = $todolist.querySelector('.todolist_input')
-                if ($input.value.length === 0){
-                    return;
-                }
-                todos.push($input.value)
-                $input.value = ''
-                const $list = $todolist.querySelector('.todolist_todo-list')
-                $list.innerHTML = todos.map(todo => `<li class="todolist_todo-wrapper"><div class="todolist_todo-title">${todo}</div><button class="todolist_todo-done-button">v</button></li>`).join('')
-            }
-        </script>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <title>TODOLIST</title>
+    <style>
+      body {
+        background-color: #cccccc;
+      }
+      .todolist {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 800px;
+        box-sizing: border-box;
+        margin: 100px auto 0 auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+      }
+      .todolist .todolist_title {
+        font-size: 48px;
+        margin: 0px;
+        margin-bottom: 20px;
+      }
+      .todolist .todolist_input-box {
+        height: 55px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .todolist .todolist_input-box .todolist_input {
+        box-sizing: border-box;
+        font-size: 28px;
+        padding: 0px;
+        margin-right: 5px;
+        border: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        width: 400px;
+        height: 50px;
+      }
+      .todolist .todolist_input-box .todolist_input:focus {
+        outline: none;
+        border-bottom: 2px solid #6eb8e6;
+        transition: 200ms ease-in-out;
+      }
+      .todolist .todolist_input-box .todolist_add-buttom {
+        border-radius: 8px;
+        font-size: 24px;
+        width: 100px;
+        height: 50px;
+        background-color: #70c8ff;
+        border: none;
+      }
+      .todolist .todolist_input-box .todolist_add-buttom:hover {
+        background-color: #6eb8e6;
+      }
+      .todolist .todolist_input-box .todolist_add-buttom:active {
+        color: white;
+        background-color: #6daed6;
+      }
+      .todolist .todolist_todo-list {
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        list-style: none;
+      }
+      .todolist .todolist_todo-list .todolist_todo-wrapper {
+        display: block;
+        height: 30px;
+        margin: 0px;
+        font-size: 24px;
+        display: flex;
+        justify-content: space-between;
+        border-left: 3px solid #70c8ff;
+        margin-bottom: 2px;
+      }
+      .todolist
+        .todolist_todo-list
+        .todolist_todo-wrapper
+        .todolist_todo-title {
+        margin-left: 15px;
+      }
+      .todolist
+        .todolist_todo-list
+        .todolist_todo-wrapper
+        .todolist_todo-done-button {
+        width: 30px;
+        height: 30px;
+        color: white;
+        background-color: #70c8ff;
+        border: none;
+        border-radius: 5px;
+      }
+      .todolist
+        .todolist_todo-list
+        .todolist_todo-wrapper
+        .todolist_todo-done-button:active {
+        background-color: #6daed6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="todolist">
+      <h1 class="todolist_title">TODOLIST</h1>
+      <div class="todolist_input-box">
+        <input class="todolist_input" />
+        <button class="todolist_add-buttom" onclick="handleClickAdd()">
+          ADD
+        </button>
+      </div>
+      <ul class="todolist_todo-list"></ul>
+    </div>
+    <script type="text/javascript">
+      let todos = [];
+      const $todolist = document.querySelector(".todolist");
+      function handleClickAdd() {
+        const $input = $todolist.querySelector(".todolist_input");
+        if ($input.value.length === 0) {
+          return;
+        }
+        todos.push({ id: Date.now(), value: $input.value });
+        $input.value = "";
+        const $list = $todolist.querySelector(".todolist_todo-list");
+        $list.innerHTML = todos
+          .map(
+            (todo) => `<li class="todolist_todo-wrapper">
+                    <div class="todolist_todo-title">${todo.value}</div>
+                    <button class="todolist_todo-done-button" onclick="handleClickDone(${todo.id})">v</button>
+                    </li>`,
+          )
+          .join("");
+      }
+      function handleClickDone(id) {
+        todos = todos.filter((todo) => todo.id !== id);
+        const $list = $todolist.querySelector(".todolist_todo-list");
+        $list.innerHTML = todos
+          .map(
+            (todo) => `<li class="todolist_todo-wrapper">
+                    <div class="todolist_todo-title">${todo.value}</div>
+                    <button class="todolist_todo-done-button" onclick="handleClickDone(${todo.id})">v</button>
+                    </li>`,
+          )
+          .join("");
+      }
+    </script>
+  </body>
 </html>
