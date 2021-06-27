@@ -61,7 +61,6 @@
                 color: white;
                 background-color: #6DAED6;
             }
-
         </style>
     </head>
     <body>
@@ -69,9 +68,17 @@
             <h1 class="todolist_title">TODOLIST</h1>
             <div class="todolist_input-box">
                 <input class="todolist_input" />
-                <button class="todolist_add-buttom">ADD</button>
+                <button class="todolist_add-buttom" onclick="handleClickAdd()">ADD</button>
             </div>
         </div>
-        <script type="text/javascript"></script>
+        <script type="text/javascript">
+            const todos = [];
+            const $todolist = document.querySelector('.todolist')
+            function handleClickAdd(){
+                const $input = $todolist.querySelector('.todolist_input')
+                todos.push($input.value)
+                $input.value = ''
+            }
+        </script>
     </body>
 </html>
