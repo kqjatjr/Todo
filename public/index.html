@@ -69,10 +69,29 @@
             }
             .todolist .todolist_todo-list .todolist_todo-wrapper {
                 display: block;
-                width: 100%;
-                padding: 0px;
+                height: 30px;
                 margin: 0px;
+                font-size: 24px;
+                display: flex;
+                justify-content: space-between;
+                border-left: 3px solid #70C8FF;
+                margin-bottom: 2px;
             }
+            .todolist .todolist_todo-list .todolist_todo-wrapper .todolist_todo-title {
+                margin-left: 15px;
+            }
+            .todolist .todolist_todo-list .todolist_todo-wrapper .todolist_todo-done-button {
+                width: 30px;
+                height: 30px;
+                color: white;
+                background-color: #70C8FF;
+                border: none;
+                border-radius: 5px;
+            }
+            .todolist .todolist_todo-list .todolist_todo-wrapper .todolist_todo-done-button:active {
+                background-color: #6DAED6;
+            }
+
         </style>
     </head>
     <body>
@@ -83,7 +102,6 @@
                 <button class="todolist_add-buttom" onclick="handleClickAdd()">ADD</button>
             </div>
             <ul class="todolist_todo-list">
-                <li class="todolist_todo-wrapper"></li>
             </ul>
         </div>
         <script type="text/javascript">
@@ -99,7 +117,7 @@
                 const $list = $todolist.querySelector('.todolist_todo-list')
                 let listStr = ''
                 for (const todo of todos){
-                    listStr += `<li>${todo}</li>`
+                    listStr += `<li class="todolist_todo-wrapper"><div class="todolist_todo-title">${todo}</div><button class="todolist_todo-done-button">v</button></li>`
                 }
                 $list.innerHTML = listStr
             }
