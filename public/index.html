@@ -61,6 +61,18 @@
                 color: white;
                 background-color: #6DAED6;
             }
+            .todolist .todolist_todo-list{
+                width: 100%;
+                padding: 0px;
+                margin: 0px;
+                list-style: none
+            }
+            .todolist .todolist_todo-list .todolist_todo-wrapper {
+                display: block;
+                width: 100%;
+                padding: 0px;
+                margin: 0px;
+            }
         </style>
     </head>
     <body>
@@ -70,6 +82,9 @@
                 <input class="todolist_input" />
                 <button class="todolist_add-buttom" onclick="handleClickAdd()">ADD</button>
             </div>
+            <ul class="todolist_todo-list">
+                <li class="todolist_todo-wrapper"></li>
+            </ul>
         </div>
         <script type="text/javascript">
             const todos = [];
@@ -78,6 +93,12 @@
                 const $input = $todolist.querySelector('.todolist_input')
                 todos.push($input.value)
                 $input.value = ''
+                const $list = $todolist.querySelector('.todolist_todo-list')
+                let listStr = ''
+                for (const todo of todos){
+                    listStr += `<li>${todo}</li>`
+                }
+                $list.innerHTML = listStr
             }
         </script>
     </body>
