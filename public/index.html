@@ -115,11 +115,7 @@
                 todos.push($input.value)
                 $input.value = ''
                 const $list = $todolist.querySelector('.todolist_todo-list')
-                let listStr = ''
-                for (const todo of todos){
-                    listStr += `<li class="todolist_todo-wrapper"><div class="todolist_todo-title">${todo}</div><button class="todolist_todo-done-button">v</button></li>`
-                }
-                $list.innerHTML = listStr
+                $list.innerHTML = todos.map(todo => `<li class="todolist_todo-wrapper"><div class="todolist_todo-title">${todo}</div><button class="todolist_todo-done-button">v</button></li>`).join('')
             }
         </script>
     </body>
