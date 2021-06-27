@@ -143,6 +143,16 @@
           )
           .join("");
       }
+      class Todo {
+        constructor() {
+          this.todos = [];
+          this.$todolist = document.querySelector(id);
+          if (!this.$todolist) {
+            throw new Error("todo의 앨리먼트가 존재하지 않습니다.");
+          }
+        }
+      }
+      const todo = new Todo("#my-todo-list");
     </script>
   </body>
 </html>
