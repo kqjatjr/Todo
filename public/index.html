@@ -140,8 +140,11 @@
           this.renderTodoList();
         };
 
-        handleClickDone = (id) => {
-          todos = todos.filter((todo) => todo.id !== id);
+        handleClickDone = (event) => {
+          const { target } = event;
+          this.todos = this.todos.filter(
+            (todo) => todo.id !== parseInt(target.dataset.id, 10),
+          );
           this.renderTodoList();
         };
 
@@ -151,10 +154,16 @@
             .map(
               (todo) => `<li class="todolist_todo-wrapper">
                     <div class="todolist_todo-title">${todo.value}</div>
-                    <button class="todolist_todo-done-button">v</button>
+                    <button class="todolist_todo-done-button" data-id="${todo.id}">v</button>
                     </li>`,
             )
             .join("");
+          const doneButtonList = this.$todolist.querySelectorAll(
+            ".todolist_todo-done-button",
+          );
+          for (const $done of doneButtonList) {
+            $done.addEventListener("click", this.handleClickDone);
+          }
         }
       }
       const todo = new Todo("#my-todo-list");
