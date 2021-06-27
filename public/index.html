@@ -135,25 +135,36 @@
           $list.addEventListener("click", this.handleClickDone);
         }
 
+        setTodo(todos) {
+          this.todos = todos;
+          this.renderTodoList();
+        }
+
         handleClickAdd = () => {
           const $input = this.$todolist.querySelector(".todolist_input");
           if ($input.value.length === 0) {
             return;
           }
-          this.todos.push({ id: Date.now(), value: $input.value });
+          this.setTodo([
+            ...this.todos,
+            {
+              id: Date.now(),
+              value: $input.value,
+            },
+          ]);
           $input.value = "";
-          this.renderTodoList();
         };
 
         handleClickDone = (event) => {
-          if (!target.classList.contains("odolist_todo-done-button")) {
+          const { target } = event;
+          if (!target.classList.contains("todolist_todo-done-button")) {
             return;
           }
-          const { target } = event;
-          this.todos = this.todos.filter(
-            (todo) => todo.id !== parseInt(target.dataset.id, 10),
+          this.setTodo(
+            this.todos.filter(
+              (todo) => todo.id !== parseInt(target.dataset.id, 10),
+            ),
           );
-          this.renderTodoList();
         };
 
         renderTodoList() {
