@@ -91,6 +91,9 @@
             const $todolist = document.querySelector('.todolist')
             function handleClickAdd(){
                 const $input = $todolist.querySelector('.todolist_input')
+                if ($input.value.length === 0){
+                    return;
+                }
                 todos.push($input.value)
                 $input.value = ''
                 const $list = $todolist.querySelector('.todolist_todo-list')
