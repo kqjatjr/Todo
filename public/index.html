@@ -107,49 +107,54 @@
       <h1 class="todolist_title">TODOLIST</h1>
       <div class="todolist_input-box">
         <input class="todolist_input" />
-        <button class="todolist_add-buttom" onclick="handleClickAdd()">
-          ADD
-        </button>
+        <button class="todolist_add-buttom">ADD</button>
       </div>
       <ul class="todolist_todo-list"></ul>
     </div>
     <script type="text/javascript">
-      let todos = [];
-      const $todolist = document.querySelector(".todolist");
-
-      function handleClickAdd() {
-        const $input = $todolist.querySelector(".todolist_input");
-        if ($input.value.length === 0) {
-          return;
-        }
-        todos.push({ id: Date.now(), value: $input.value });
-        $input.value = "";
-        renderTodoList(todos);
-      }
-
-      function handleClickDone(id) {
-        todos = todos.filter((todo) => todo.id !== id);
-        renderTodoList(todos);
-      }
-
-      function renderTodoList(todos) {
-        const $list = $todolist.querySelector(".todolist_todo-list");
-        $list.innerHTML = todos
-          .map(
-            (todo) => `<li class="todolist_todo-wrapper">
-                    <div class="todolist_todo-title">${todo.value}</div>
-                    <button class="todolist_todo-done-button" onclick="handleClickDone(${todo.id})">v</button>
-                    </li>`,
-          )
-          .join("");
-      }
       class Todo {
-        constructor() {
+        constructor(id) {
           this.todos = [];
           this.$todolist = document.querySelector(id);
           if (!this.$todolist) {
             throw new Error("todo의 앨리먼트가 존재하지 않습니다.");
           }
+          this.initializeEvents();
+        }
+
+        initializeEvents() {
+          const $add = this.$todolist.querySelector(".todolist_add-buttom");
+          if (!$add) {
+            throw new Error("todo add 버튼의 앨리먼트가 존재하지 않습니다.");
+          }
+          $add.addEventListener("click", this.handleClickAdd);
+        }
+
+        handleClickAdd = () => {
+          const $input = this.$todolist.querySelector(".todolist_input");
+          if ($input.value.length === 0) {
+            return;
+          }
+          this.todos.push({ id: Date.now(), value: $input.value });
+          $input.value = "";
+          this.renderTodoList();
+        };
+
+        handleClickDone = (id) => {
+          todos = todos.filter((todo) => todo.id !== id);
+          this.renderTodoList();
+        };
+
+        renderTodoList() {
+          const $list = this.$todolist.querySelector(".todolist_todo-list");
+          $list.innerHTML = this.todos
+            .map(
+              (todo) => `<li class="todolist_todo-wrapper">
+                    <div class="todolist_todo-title">${todo.value}</div>
+                    <button class="todolist_todo-done-button">v</button>
+                    </li>`,
+            )
+            .join("");
         }
       }
       const todo = new Todo("#my-todo-list");
