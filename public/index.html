@@ -137,6 +137,7 @@
 
         setTodo(todos) {
           this.todos = todos;
+          this.todos.sort((a, b) => a.value.localeCompare(b.value));
           this.renderTodoList();
         }
 
